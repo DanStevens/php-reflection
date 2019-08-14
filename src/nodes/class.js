@@ -115,13 +115,13 @@ Class.prototype.getProperties = function(includeParents) {
  * Retrieves a list of methods
  */
 Class.prototype.getMethods = function(includeParents) {
-    var result = {};
+    var result = [];
     var methods = this._db.resolve(
         this.get('methods')
     );
     if (methods) {
         for(var i = 0; i < methods.length; i++) {
-            result[methods[i].name] = methods[i];
+            result.push(methods[i]);
         }
     }
     if (includeParents) {
@@ -130,7 +130,7 @@ Class.prototype.getMethods = function(includeParents) {
             var parentMethods = parent.getMethods(true);
             for(var k in parentMethods) {
                 if (!(k in result)) {
-                    result[k] = parentMethods[k];
+                    result.push (parentMethods[k]);
                 }
             }
         }
