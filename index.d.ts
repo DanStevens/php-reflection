@@ -110,6 +110,8 @@ declare module "php-reflection" {
         eachChild(cb: (child: Node, index: number) => void): Node;
         static extends(type: string): Node;
         static create(type: string, graph: graph): Node;
+        getChildNodes(): Node[];
+        getChildNodes(type: string): Node[];
     }
 
     export class Block extends Node {

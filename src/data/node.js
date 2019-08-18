@@ -100,17 +100,18 @@ node.prototype.getNamespace = function() {
     return this._namespace;
 };
 
-/**
- * Gets the parent block
- * @return {block} {@link BLOCK.md|:link:}
- */
+node.prototype.getChildNodes = function(type) {
+    var children = this._related.parent;
+    if (children && children.length > 0) {
+        return children = this._db.resolve(children);
+    }
+    return [];
+}
+
 node.prototype.eachChild = function(cb) {
-    var childs = this._related.parent;
-    if (childs && childs.length > 0) {
-        childs = this._db.resolve(childs);
-        for(var i = 0; i < childs.length; i++) {
-            cb(childs[i], i);
-        }
+    var children = this.getChildNodes();
+    for(var i = 0; i < children.length; i++) {
+        cb(children[i], i);
     }
     return this;
 };
